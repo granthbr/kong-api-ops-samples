@@ -1,0 +1,47 @@
+openapi: 3.0.0
+
+info:
+  title: OAS template API
+  version: 0.9.0
+  description: >
+    This is a template OpenAPI specification. 
+
+components:
+  securitySchemes:
+    common-aad-scheme:
+      type: openIdConnect
+      openIdConnectUrl: https://keycloak.keycloak:443/realms/kong/.well-known/openid-configuration
+
+servers:
+ - url: http://echo-server:8080
+
+security:
+  - common-auth-scheme:
+    - Platform.Access
+
+paths: 
+  /echo:
+    get:
+      operationId: "cloud_api_get"
+      security:
+        - common-auth-scheme:
+          - Platform.Read
+      responses:
+        "200":
+          description: OK
+    post:
+      operationId: "cloud_api_post"
+      security:
+        - common-auth-scheme:
+          - Platform.Write
+      responses:
+        "200":
+          description: OK
+
+tags: 
+  - name: api-ci
+    description: CI000
+  - name: backend-ci
+    description: CII000
+  - name: runtime-group-name
+    description: SampleRgOne

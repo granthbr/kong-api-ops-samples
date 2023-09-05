@@ -1,0 +1,32 @@
+x-base-config: &base-config
+  client_id:
+  - "kong-authorization-code"
+  client_secret:
+  - "secret"
+  issuer: https://keycloak.keycloak:443/realms/kong/.well-known/openid-configuration
+  issuers_allowed: ["https://keycloak.keycloak:443/realms/kong", "https://keycloak.mb.local/realms/kong"]
+  roles_claim: ["realm_access", "roles"]
+  verify_claims: true
+  verify_signature: true
+  consumer_optional: true
+  scopes_required: []
+
+patches:
+  - selectors:
+    - $..services[*].routes[*][?(@.name == "cloud-integration-oas-template-api_cloud-api-get")]
+    values:
+      plugins:
+      - name: openid-connect
+        enabled: true
+        config:
+          <<: *base-config
+          roles_required: ["Platform.Read"]
+  - selectors:
+    - $..services[*].routes[*][?(@.name == "cloud-integration-oas-template-api_cloud-api-post")]
+    values:
+      plugins:
+      - name: openid-connect
+        enabled: true
+        config:
+          <<: *base-config
+          roles_required: ["Platform.Write"]

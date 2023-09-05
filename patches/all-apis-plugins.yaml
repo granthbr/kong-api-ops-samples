@@ -1,0 +1,7 @@
+plugins:
+- name: file-log
+  config:
+    path: /dev/stdout
+- name: opentelemetry
+  config:
+    endpoint: "http://jaeger-aio.jaeger:4318/v1/traces"
