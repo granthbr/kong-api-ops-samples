@@ -1,0 +1,35 @@
+_format_version: "3.0"
+services:
+- host: echo-server
+  id: 9eab9fd4-06b0-5390-98e1-df9e3271e549
+  name: oas-template-api
+  path: /
+  plugins: []
+  port: 8080
+  protocol: http
+  routes:
+  - id: 38e2c777-a7da-5173-bc3b-5ebdee74ed2e
+    methods:
+    - GET
+    name: oas-template-api_cloud-api-get
+    paths:
+    - ~/echo$
+    plugins: []
+    regex_priority: 200
+    strip_path: false
+    tags:
+    - demo
+  - id: 1d882c67-0854-5e08-92d4-ac567c854959
+    methods:
+    - POST
+    name: oas-template-api_cloud-api-post
+    paths:
+    - ~/echo$
+    plugins: []
+    regex_priority: 200
+    strip_path: false
+    tags:
+    - demo
+  tags:
+  - demo
+upstreams: []
