@@ -1,7 +1,0 @@
-_format_version: "3.0"
-_info:
-  defaults: {}
-  select_tags:
-  - demo
-_konnect:
-  runtime_group_name: nbim
